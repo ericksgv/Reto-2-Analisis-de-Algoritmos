@@ -23,7 +23,7 @@ def funcion_lineal(array,objetivo):
 
   return (lista)
 
-def funcion_constante(lista, resultado):
+def funcion_con_while(lista, resultado):
     if len(lista) <= 1:
         return "La lista debe tener al menos dos elementos para formar parejas."
 
@@ -78,18 +78,18 @@ def dividir_vencer(nums, target):
     return pairs
 
 def main():
-    n = [10, 100, 1000, 10000]
-    tiempos = {'funcion_constante': [], 'funcion_fuerza_bruta':[], 'dividir_vencer':[], 'funcion_lineal':[] }
+    n = [10, 100, 1000, 10000, 100000]
+    tiempos = {'funcion_con_while': [], 'funcion_fuerza_bruta':[], 'dividir_vencer':[], 'funcion_lineal':[] }
 
     for i in n:
         nums = [random.randint(1, 5) for _ in range(i)]  # Generar lista de números aleatorios
         target = -1
 
         start = time.perf_counter()
-        funcion_constante(nums, target)
+        funcion_con_while(nums, target)
         end = time.perf_counter()
         dif = end - start
-        tiempos['funcion_constante'].append(dif)
+        tiempos['funcion_con_while'].append(dif)
 
         start = time.perf_counter()
         funcion_fuerza_bruta(nums, target)
@@ -99,19 +99,19 @@ def main():
 
         
         start = time.perf_counter()
-        funcion_fuerza_bruta(nums, target)
+        dividir_vencer(nums, target)
         end = time.perf_counter()
         dif = end - start
         tiempos['dividir_vencer'].append(dif)
 
         start = time.perf_counter()
-        funcion_fuerza_bruta(nums, target)
+        funcion_lineal(nums, target)
         end = time.perf_counter()
         dif = end - start
         tiempos['funcion_lineal'].append(dif)
 
-    print("Tiempos de ejecución para funcion_constante:")
-    for i, tipo in zip(n, tiempos['funcion_constante']):
+    print("Tiempos de ejecución para funcion_con_while:")
+    for i, tipo in zip(n, tiempos['funcion_con_while']):
         print(f"{i} -> {tipo} segundos")
 
     print("Tiempos de ejecución para funcion_fuerza_bruta:")
@@ -130,13 +130,13 @@ def main():
     df.index.name = 'n'
     df.reset_index(inplace=True)
 
-    plt.plot(df['n'], df['funcion_constante'], label='funcion_constante')
+    plt.plot(df['n'], df['funcion_con_while'], label='funcion_con_while')
     plt.plot(df['n'], df['funcion_fuerza_bruta'], label='funcion_fuerza_bruta')
     plt.plot(df['n'], df['dividir_vencer'], label='dividir_vencer')
     plt.plot(df['n'], df['funcion_lineal'], label='funcion_lineal')
     plt.xlabel('n')
     plt.ylabel('Tiempo de ejecución (segundos)')
-    plt.title('Comparación de tiempos de ejecución para funcion_constante y funcion_fuerza_bruta')
+    plt.title('Comparación de tiempos de ejecución para funcion_con_while y funcion_fuerza_bruta')
     plt.legend()
 
     plt.savefig("ejercicio2.png")
