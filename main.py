@@ -78,7 +78,7 @@ def dividir_vencer(nums, target):
     return pairs
 
 def main():
-    n = [10, 100, 1000, 10000, 100000]
+    n = [10, 100, 1000, 10000]
     tiempos = {'funcion_con_while': [], 'funcion_fuerza_bruta':[], 'dividir_vencer':[], 'funcion_lineal':[] }
 
     for i in n:
